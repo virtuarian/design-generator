@@ -42,7 +42,7 @@ const HTMLConverterApp = () => {
     const savedModel = getSettings<string>('selected_model', DEFAULT_MODEL);
     
     // カスタムモデルを取得
-    const customModels: Record<string, any> = getCustomModels();
+    const customModels: Record<string, { provider: string, name: string }> = getCustomModels();
       
     // 選択されたモデルが存在するか確認（ビルトインまたはカスタム）
     const modelExists = AI_MODELS[savedModel] || customModels[savedModel];
@@ -59,7 +59,7 @@ const HTMLConverterApp = () => {
   }, []);
   
   // 指定されたモデルのAPIキーをチェック
-  const checkApiKeyForModel = (modelKey: string, customModels: Record<string, any> = {}) => {
+  const checkApiKeyForModel = (modelKey: string, customModels: Record<string, { provider: string, name: string }> = {}) => {
     const model = AI_MODELS[modelKey] || customModels[modelKey];
     if (!model) return;
     

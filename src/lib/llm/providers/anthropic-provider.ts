@@ -167,7 +167,7 @@ export class AnthropicProvider extends BaseLLMProvider {
   /**
    * エラーのタイプを判別
    */
-  private getErrorType(status: number, error: any): LLMErrorType {
+  private getErrorType(status: number, error: { error?: { message?: string; type?: string } }): LLMErrorType {
     switch (status) {
       case 401:
         return LLMErrorType.AUTH_ERROR;
@@ -182,6 +182,7 @@ export class AnthropicProvider extends BaseLLMProvider {
       case 503:
         return LLMErrorType.SERVER_ERROR;
       default:
+        console.log('Anthropic APIエラー:', error);
         return LLMErrorType.UNKNOWN;
     }
   }

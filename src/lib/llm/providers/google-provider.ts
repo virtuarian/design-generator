@@ -191,7 +191,7 @@ console.log('finalPrompt', finalPrompt);
   /**
    * エラーのタイプを判別
    */
-  private getErrorType(status: number, error: any): LLMErrorType {
+  private getErrorType(status: number, error: { error?: { message?: string } }): LLMErrorType {
     switch (status) {
       case 400:
         return LLMErrorType.INVALID_REQUEST;
@@ -205,6 +205,7 @@ console.log('finalPrompt', finalPrompt);
       case 503:
         return LLMErrorType.SERVER_ERROR;
       default:
+        console.log('Google APIエラー:', error);
         return LLMErrorType.UNKNOWN;
     }
   }

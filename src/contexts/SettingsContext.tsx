@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 import { AppSettings } from '@/lib/types';
 import { DEFAULT_SETTINGS } from '@/lib/constants/constants';
-import { getSettings, saveSettings } from '@/lib/storage';
+import {saveSettings } from '@/lib/storage';
 
 // コンテキストに含める値の型定義
 interface SettingsContextType {
@@ -66,8 +66,8 @@ export const SettingsProvider = ({ children, initialSettings }: SettingsProvider
       saveSettings('settings', clonedSettings);
       
     //   console.log('設定更新完了:', clonedSettings.basic.designStyle);
-    } catch (error) {
-    //   console.error('設定更新エラー:', error);
+    } catch (error:unknown) {
+      console.error('設定更新エラー:', error);
       
       // フォールバック：JSONを使った方法
       const jsonCopy = JSON.parse(JSON.stringify(newSettings));

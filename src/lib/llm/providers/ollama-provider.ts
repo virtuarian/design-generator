@@ -188,7 +188,7 @@ export class OllamaProvider extends BaseLLMProvider {
   /**
    * エラーのタイプを判別
    */
-  private getErrorType(status: number, error: any): LLMErrorType {
+  private getErrorType(status: number, error: { error?: { message?: string } }): LLMErrorType {
     switch (status) {
       case 400:
         return LLMErrorType.INVALID_REQUEST;
@@ -204,6 +204,7 @@ export class OllamaProvider extends BaseLLMProvider {
       case 503:
         return LLMErrorType.SERVER_ERROR;
       default:
+        console.log('Ollama APIエラー:', error);
         return LLMErrorType.UNKNOWN;
     }
   }

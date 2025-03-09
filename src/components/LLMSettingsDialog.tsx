@@ -49,7 +49,7 @@ interface LLMSettingsDialogProps {
 
 const LLMSettingsDialog: React.FC<LLMSettingsDialogProps> = ({ open, onOpenChange }) => {
   const [activeTab, setActiveTab] = useState<string>('api-keys');
-  const [activeProvider, setActiveProvider] = useState<ApiProvider>('openai');
+  const [,setActiveProvider] = useState<ApiProvider>('openai');
   const [apiKeys, setApiKeys] = useState<Record<ApiProvider, string>>({
     openai: '',
     anthropic: '',
@@ -133,7 +133,7 @@ const LLMSettingsDialog: React.FC<LLMSettingsDialogProps> = ({ open, onOpenChang
         setCopied(prev => ({ ...prev, [provider]: false }));
       }, 2000);
     } catch (error) {
-      toast.error('クリップボードへのコピーに失敗しました');
+      toast.error('クリップボードへのコピーに失敗しました:' + error);
     }
   };
 
@@ -151,7 +151,7 @@ const LLMSettingsDialog: React.FC<LLMSettingsDialogProps> = ({ open, onOpenChang
       toast.success('APIキーを保存しました');
       onOpenChange(false);
     } catch (error) {
-      toast.error('APIキーの保存に失敗しました');
+      toast.error('APIキーの保存に失敗しました:'+error);
     } finally {
       setSaving(false);
     }

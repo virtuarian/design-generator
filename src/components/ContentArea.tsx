@@ -6,6 +6,7 @@ import { FileCode, Eye, Code, Download, Check, Sparkles, Copy, RefreshCw, AlertT
 import { useSettings } from '@/contexts/SettingsContext';
 import { useView } from '@/contexts/ViewContext';
 import Preview from '@/components/Preview';
+import { AppSettings } from '@/lib/types';
 
 // Content Areaのpropsを簡素化
 interface ContentAreaProps {
@@ -13,7 +14,7 @@ interface ContentAreaProps {
   setInputText: (text: string) => void;
   outputHtml: string;
   isLoading: boolean;
-  onConvert: (settings: any) => Promise<string | null>;
+  onConvert: (settings: AppSettings) => Promise<string | null>;
 }
 
 const ContentArea: React.FC<ContentAreaProps> = ({

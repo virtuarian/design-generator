@@ -1,27 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Eye, EyeOff, RefreshCw, PaintBucket, Type, MessageSquare } from 'lucide-react';
+import { Eye, EyeOff, RefreshCw,  MessageSquare } from 'lucide-react';
 import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { DEFAULT_SETTINGS } from '@/lib/constants/constants';
 import { getStyleDefinition } from '@/lib/constants/styleDefinitions';
 import { useSettings } from '@/contexts/SettingsContext';
 import { useView } from '@/contexts/ViewContext';
 import { DesignStyle as AppDesignStyle, SettingTab } from '@/lib/types';
 
 // 利用可能なフォントファミリーのリスト
-const FONT_FAMILIES = [
-  { value: 'sans', label: 'サンセリフ' },
-  { value: 'serif', label: 'セリフ' }, 
-  { value: 'rounded', label: '丸ゴシック' },
-  { value: 'script', label: '手書き風' },
-  { value: 'mono', label: '等幅' }
-];
+// const FONT_FAMILIES = [
+//   { value: 'sans', label: 'サンセリフ' },
+//   { value: 'serif', label: 'セリフ' }, 
+//   { value: 'rounded', label: '丸ゴシック' },
+//   { value: 'script', label: '手書き風' },
+//   { value: 'mono', label: '等幅' }
+// ];
 
 // すべてのスタイルオプションを定義
 const DESIGN_STYLE_OPTIONS = [
@@ -84,7 +79,7 @@ const SettingsPanel = () => {
       }
     } catch (error) {
       // console.warn('プロンプト生成に失敗しました:', error);
-      setGeneratedPrompt('プロンプトの表示に失敗しました。');
+      setGeneratedPrompt('プロンプトの表示に失敗しました。:' + error);
     }
   };
 
@@ -154,30 +149,30 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}`
   };
 
   // カラー設定が変更されたときの処理
-  const handleColorChange = (colorKey: string, value: string) => {
-    const newSettings = {
-      ...settings,
-      colors: {
-        ...settings.colors,
-        [colorKey]: value
-      }
-    };
-    updateSettings(newSettings);
-    setSettingsChanged(true);
-  };
+  // const handleColorChange = (colorKey: string, value: string) => {
+  //   const newSettings = {
+  //     ...settings,
+  //     colors: {
+  //       ...settings.colors,
+  //       [colorKey]: value
+  //     }
+  //   };
+  //   updateSettings(newSettings);
+  //   setSettingsChanged(true);
+  // };
 
   // フォント設定が変更されたときの処理
-  const handleFontChange = (fontType: 'headingFont' | 'bodyFont', value: string) => {
-    const newSettings = {
-      ...settings,
-      typography: {
-        ...settings.typography,
-        [fontType]: value
-      }
-    };
-    updateSettings(newSettings);
-    setSettingsChanged(true);
-  };
+  // const handleFontChange = (fontType: 'headingFont' | 'bodyFont', value: string) => {
+  //   const newSettings = {
+  //     ...settings,
+  //     typography: {
+  //       ...settings.typography,
+  //       [fontType]: value
+  //     }
+  //   };
+  //   updateSettings(newSettings);
+  //   setSettingsChanged(true);
+  // };
 
   // プロンプトが変更されたときの処理
   const handlePromptChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
