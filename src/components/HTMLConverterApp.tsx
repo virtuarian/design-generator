@@ -222,7 +222,7 @@ const HTMLConverterApp = () => {
           <header className="bg-stone-800 text-stone-100 px-6 py-3 flex justify-between items-center shadow-md">
             <div className="flex items-center gap-3">
               <Wand2 className="text-amber-400" />
-              <h1 className="text-xl font-medium">HTML コンバーター</h1>
+              <h1 className="text-xl font-medium">Design Generator</h1>
             </div>
             
             <div className="flex items-center gap-4">

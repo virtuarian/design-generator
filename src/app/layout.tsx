@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "グラレコジェネレーター",
+  title: "Design Generator",
   description: "入力テキストをスタイル設定に基づいてHTMLに変換します",
 };
 

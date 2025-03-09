@@ -86,6 +86,8 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
           {renderProviderModels('openai', 'OpenAI')}
           {renderProviderModels('anthropic', 'Anthropic')}
           {renderProviderModels('google', 'Google')}
+          {renderProviderModels('ollama', 'Ollama')}
+          {renderProviderModels('openrouter', 'OpenRouter')}          
         </DropdownMenuGroup>
         
         {selectedModel?.description && (

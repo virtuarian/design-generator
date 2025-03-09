@@ -54,14 +54,14 @@ const SettingsPanel = () => {
   // 設定が変更されたときにローカルステートを同期
   useEffect(() => {
     setSelectedStyle(settings.basic.designStyle);
-    console.log('設定変更を検知: 現在のスタイル =', settings.basic.designStyle);
+    // console.log('設定変更を検知: 現在のスタイル =', settings.basic.designStyle);
   }, [settings.basic.designStyle]);
 
   // コンポーネントがマウントされた時に必ずスタイルタブをアクティブにする
   // 空の依存配列を使って初回レンダリング時のみ実行されるように修正
   useEffect(() => {
     setActiveSetting('style');
-    console.log('初期タブを設定: style');
+    // console.log('初期タブを設定: style');
   }, []); // 依存配列を空に設定
 
   // プロンプトプレビューを生成する関数
@@ -83,7 +83,7 @@ const SettingsPanel = () => {
         setGeneratedPrompt(customPrompt);
       }
     } catch (error) {
-      console.warn('プロンプト生成に失敗しました:', error);
+      // console.warn('プロンプト生成に失敗しました:', error);
       setGeneratedPrompt('プロンプトの表示に失敗しました。');
     }
   };
@@ -100,11 +100,11 @@ const SettingsPanel = () => {
 
   // デザインスタイルが変更されたときの処理を完全に書き直し
   const handleStyleChange = (styleId: string) => {
-    console.log(`スタイル変更リクエスト: ${styleId} (現在: ${settings.basic.designStyle})`);
+    // console.log(`スタイル変更リクエスト: ${styleId} (現在: ${settings.basic.designStyle})`);
     
     // すでに選択されているスタイルなら何もしない
     if (styleId === settings.basic.designStyle) {
-      console.log('既に選択されているスタイルです。変更をスキップします。');
+      // console.log('既に選択されているスタイルです。変更をスキップします。');
       return;
     }
 
@@ -113,7 +113,7 @@ const SettingsPanel = () => {
     
     // スタイル定義を取得
     const styleDefinition = getStyleDefinition(styleId);
-    console.log('スタイル定義:', styleDefinition.displayName);
+    // console.log('スタイル定義:', styleDefinition.displayName);
     
     // プロンプトを生成
     const fullPrompt = `
@@ -150,7 +150,7 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}
     setShowPromptPreview(true);
     setSettingsChanged(true);
     
-    console.log('スタイル変更完了:', styleId);
+    // console.log('スタイル変更完了:', styleId);
   };
 
   // カラー設定が変更されたときの処理
@@ -207,7 +207,7 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}
     setSettingsChanged(true);
   };
   
-  console.log('レンダリング時の選択スタイル:', selectedStyle, '設定値:', settings.basic.designStyle);
+  // console.log('レンダリング時の選択スタイル:', selectedStyle, '設定値:', settings.basic.designStyle);
 
   return (
     <aside className="w-80 bg-stone-100 border-r border-stone-200 flex flex-col transition-all duration-300 ease-in-out overflow-hidden">

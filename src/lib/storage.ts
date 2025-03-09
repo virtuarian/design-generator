@@ -42,7 +42,7 @@ export const getApiKey = (provider: string): string => {
   
   try {
     const key = localStorage.getItem(`html_converter_api_key_${provider}`);
-    console.log(`APIキー取得試行: ${provider}, 結果: ${key ? '成功' : '未設定'}`);
+    // console.log(`APIキー取得試行: ${provider}, 結果: ${key ? '成功' : '未設定'}`);
     return key || '';
   } catch (error) {
     console.error(`APIキーの取得に失敗しました: ${provider}`, error);

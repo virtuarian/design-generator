@@ -52,7 +52,7 @@ export const SettingsProvider = ({ children, initialSettings }: SettingsProvider
 
   // メモ化した設定更新関数
   const updateSettings = useCallback((newSettings: AppSettings) => {
-    console.log('設定を更新: スタイル=', newSettings.basic.designStyle);
+    // console.log('設定を更新: スタイル=', newSettings.basic.designStyle);
     
     // 参照の問題を避けるため、完全に新しいオブジェクトを作成
     // structuredCloneはJavaScriptの組み込み関数で、オブジェクトのディープコピーを作成
@@ -65,9 +65,9 @@ export const SettingsProvider = ({ children, initialSettings }: SettingsProvider
       // ローカルストレージに保存
       saveSettings('settings', clonedSettings);
       
-      console.log('設定更新完了:', clonedSettings.basic.designStyle);
+    //   console.log('設定更新完了:', clonedSettings.basic.designStyle);
     } catch (error) {
-      console.error('設定更新エラー:', error);
+    //   console.error('設定更新エラー:', error);
       
       // フォールバック：JSONを使った方法
       const jsonCopy = JSON.parse(JSON.stringify(newSettings));
