@@ -172,4 +172,4 @@ export type PresetType = 'corporate' | 'casual' | 'minimal' | 'creative' | 'popA
 export type ViewMode = 'edit' | 'preview' | 'code';
 
 // 設定パネルのタブ
-export type SettingTab = 'basic' | 'advanced';
+export type SettingTab = 'style' | 'prompt';

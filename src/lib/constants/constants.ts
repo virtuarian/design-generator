@@ -50,16 +50,16 @@ export const COLOR_THEME_MAP: Record<ColorTheme, {
 // デフォルトのアプリケーション設定
 export const DEFAULT_SETTINGS: AppSettings = {
   basic: {
-    colorTheme: 'coffee',
-    fontStyle: 'sans',
-    layoutType: 'centered',
+    colorTheme: 'blue', // またはグラレコに適したカラーテーマ
+    fontStyle: 'rounded', // グラレコに適したフォント
+    layoutType: 'full',
     hasShadow: true,
     hasBorder: true,
-    hasAnimation: false,
-    textureType: 'none',
+    hasAnimation: true,
+    textureType: 'paper', // グラレコは紙テクスチャが合う
     gradientType: 'none',
-    designStyle: 'standard', // デザインスタイル追加
-    summarizeText: false // デフォルトはオフ
+    designStyle: 'graphicRecordingNormal', // ここをgraphicRecordingNormalに変更
+    summarizeText: false
   },
   colors: {
     mainColor: COLOR_THEME_MAP.coffee.mainColor,
@@ -114,7 +114,39 @@ export const DEFAULT_SETTINGS: AppSettings = {
     layerEffects: false,
     tiltEffects: false
   },
-  additionalInstructions: ''
+  additionalInstructions: `
+# グラフィックレコーディング風スタイル
+標準的なグラフィックレコーディングスタイル
+
+## スタイル指示
+# グラフィックレコーディング風インフォグラフィック変換プロンプト V2
+## 目的
+以下の内容を、超一流デザイナーが作成したような、日本語で完璧なグラフィックレコーディング風のHTMLインフォグラフィックに変換してください。情報設計とビジュアルデザインの両面で最高水準を目指します。
+手書き風の図形やFont Awesomeアイコンを大きく活用して内容を視覚的かつ直感的に表現します。
+
+## デザイン仕様
+### 1. カラースキーム
+<palette>
+<color name='MysticLibrary-1' rgb='2E578C' r='46' g='87' b='140' />
+<color name='MysticLibrary-2' rgb='182D40' r='24' g='45' b='64' />
+<color name='MysticLibrary-3' rgb='BF807A' r='191' g='128' b='122' />
+<color name='MysticLibrary-4' rgb='592A2A' r='89' g='42' b='42' />
+<color name='MysticLibrary-5' rgb='F2F2F2' r='242' g='242' b='242' />
+</palette>
+
+### 2. グラフィックレコーディング要素
+- 左上から右へ、上から下へと情報を順次配置
+- 日本語の手書き風フォントの使用（Yomogi, Zen Kurenaido, Kaisei Decol）
+- 手描き風の囲み線、矢印、バナー、吹き出し
+- テキストと視覚要素（Font Awesomeアイコン、シンプルな図形）の組み合わせ
+- Font Awesomeアイコンは各セクションの内容を表現するものを大きく（2x〜3x）表示
+- キーワードごとに関連するFont Awesomeアイコンを隣接配置
+
+## 全体的な指針
+- 読み手が自然に視線を移動できる配置（Font Awesomeアイコンで視線誘導）
+- 情報の階層と関連性を視覚的に明確化（階層ごとにアイコンのサイズや色を変える）
+- 手書き風の要素とFont Awesomeアイコンを組み合わせて親しみやすさとプロフェッショナル感を両立
+  `
 };
 
 // デザインスタイルの説明

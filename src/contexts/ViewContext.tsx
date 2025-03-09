@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { ViewMode, SettingTab } from '@/lib/types';
 
 // コンテキストに含める値の型定義
@@ -21,7 +21,7 @@ interface ViewContextType {
 const ViewContext = createContext<ViewContextType>({
   currentView: 'edit',
   setCurrentView: () => {},
-  activeSetting: 'basic',
+  activeSetting: 'style', // デフォルトを'style'に設定
   setActiveSetting: () => {},
   isAdvancedMode: false,
   setIsAdvancedMode: () => {},
@@ -44,11 +44,18 @@ interface ViewProviderProps {
 // プロバイダーコンポーネント
 export const ViewProvider = ({ children }: ViewProviderProps) => {
   const [currentView, setCurrentView] = useState<ViewMode>('edit');
-  const [activeSetting, setActiveSetting] = useState<SettingTab>('basic');
+  // 明示的にデフォルト値を'style'に設定
+  const [activeSetting, setActiveSetting] = useState<SettingTab>('style'); 
   const [isAdvancedMode, setIsAdvancedMode] = useState<boolean>(false);
   const [isConverted, setIsConverted] = useState<boolean>(false);
   const [settingsChanged, setSettingsChanged] = useState<boolean>(false);
   const [showHtmlCode, setShowHtmlCode] = useState<boolean>(false);
+
+  // コンポーネントのマウント時に実行される効果
+  useEffect(() => {
+    // 確実にスタイルタブが選択されるようにする
+    setActiveSetting('style');
+  }, []);
 
   const value = {
     currentView,

@@ -57,6 +57,13 @@ const SettingsPanel = () => {
     console.log('設定変更を検知: 現在のスタイル =', settings.basic.designStyle);
   }, [settings.basic.designStyle]);
 
+  // コンポーネントがマウントされた時に必ずスタイルタブをアクティブにする
+  // 空の依存配列を使って初回レンダリング時のみ実行されるように修正
+  useEffect(() => {
+    setActiveSetting('style');
+    console.log('初期タブを設定: style');
+  }, []); // 依存配列を空に設定
+
   // プロンプトプレビューを生成する関数
   const generatePromptPreview = () => {
     try {
@@ -216,9 +223,9 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}
         {/* タブと内容を一つの Tabs コンポーネントで囲む */}
         <Tabs value={activeSetting} onValueChange={(value) => setActiveSetting(value as SettingTab)} className="flex-1 flex flex-col">
           <div className="p-4 border-b border-stone-200 bg-white">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="style">スタイル</TabsTrigger>
-              <TabsTrigger value="customize">カスタマイズ</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="style" >スタイル</TabsTrigger>
+              {/* <TabsTrigger value="customize">カスタマイズ</TabsTrigger> */}
               <TabsTrigger value="prompt">プロンプト</TabsTrigger>
             </TabsList>
           </div>
@@ -266,16 +273,15 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}
             </TabsContent>
             
             {/* カスタマイズタブ */}
-            <TabsContent value="customize" className="p-4 space-y-4 h-full">
+            {/* ※一旦非表示 */}
+            {/* <TabsContent value="customize" className="p-4 space-y-4 h-full">
               <Accordion type="single" collapsible defaultValue="colors" className="w-full">
-                {/* カラー設定 */}
                 <AccordionItem value="colors">
                   <AccordionTrigger className="flex items-center gap-2 text-sm">
                     <PaintBucket className="h-4 w-4" />
                     <span>カラー設定</span>
                   </AccordionTrigger>
                   <AccordionContent className="space-y-3">
-                    {/* メインカラー */}
                     <div className="space-y-1">
                       <div className="flex justify-between items-center">
                         <Label htmlFor="mainColor" className="text-xs">メインカラー</Label>
@@ -302,7 +308,6 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}
                       </div>
                     </div>
                     
-                    {/* セカンダリカラー */}
                     <div className="space-y-1">
                       <div className="flex justify-between items-center">
                         <Label htmlFor="secondaryColor" className="text-xs">セカンダリカラー</Label>
@@ -329,7 +334,6 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}
                       </div>
                     </div>
                     
-                    {/* アクセントカラー */}
                     <div className="space-y-1">
                       <div className="flex justify-between items-center">
                         <Label htmlFor="accentColor" className="text-xs">アクセントカラー</Label>
@@ -356,7 +360,6 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}
                       </div>
                     </div>
                     
-                    {/* 背景色 */}
                     <div className="space-y-1">
                       <div className="flex justify-between items-center">
                         <Label htmlFor="backgroundColor" className="text-xs">背景色</Label>
@@ -385,14 +388,12 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}
                   </AccordionContent>
                 </AccordionItem>
                 
-                {/* フォント設定 */}
                 <AccordionItem value="typography">
                   <AccordionTrigger className="flex items-center gap-2 text-sm">
                     <Type className="h-4 w-4" />
                     <span>フォント設定</span>
                   </AccordionTrigger>
                   <AccordionContent className="space-y-3">
-                    {/* 見出しフォント */}
                     <div className="space-y-1">
                       <Label htmlFor="headingFont" className="text-xs">見出しフォント</Label>
                       <Select
@@ -412,7 +413,6 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}
                       </Select>
                     </div>
                     
-                    {/* 本文フォント */}
                     <div className="space-y-1">
                       <Label htmlFor="bodyFont" className="text-xs">本文フォント</Label>
                       <Select
@@ -435,7 +435,7 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}
                 </AccordionItem>
               </Accordion>
             </TabsContent>
-            
+             */}
             {/* プロンプトタブ */}
             <TabsContent value="prompt" className="p-4 h-full">
               <div className="space-y-3">
