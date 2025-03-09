@@ -121,18 +121,18 @@ const SettingsPanel = () => {
 ${styleDefinition.description}
 
 ## スタイル指示
-${styleDefinition.prompt || '特別なスタイル指示はありません。'}
+${styleDefinition.prompt || '特別なスタイル指示はありません。'}`
 
-## デザイン設定
-- カラーテーマ: ${settings.basic.colorTheme}
-- メインカラー: ${settings.colors.mainColor}
-- セカンダリカラー: ${settings.colors.secondaryColor}
-- アクセントカラー: ${settings.colors.accentColor}
-- 背景色: ${settings.colors.backgroundColor}
-- 見出しフォント: ${settings.typography.headingFont}
-- 本文フォント: ${settings.typography.bodyFont}
-- レイアウト: ${settings.basic.layoutType}
-`;
+// ## デザイン設定
+// - カラーテーマ: ${settings.basic.colorTheme}
+// - メインカラー: ${settings.colors.mainColor}
+// - セカンダリカラー: ${settings.colors.secondaryColor}
+// - アクセントカラー: ${settings.colors.accentColor}
+// - 背景色: ${settings.colors.backgroundColor}
+// - 見出しフォント: ${settings.typography.headingFont}
+// - 本文フォント: ${settings.typography.bodyFont}
+// - レイアウト: ${settings.basic.layoutType}
+// `;
     
     // 新しい設定オブジェクトを作成（完全に新しいインスタンス）
     const newSettings = structuredClone(settings);
@@ -484,13 +484,13 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}
           </div>
         </Tabs>
         
-        <Separator />
+        {/* <Separator />
         
         <div className="p-4 flex items-center justify-center">
           <div className="text-xs text-stone-500">
             変更は自動的に適用されます
           </div>
-        </div>
+        </div> */}
       </div>
     </aside>
   );

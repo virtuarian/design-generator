@@ -16,6 +16,18 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Design Generator",
   description: "入力テキストをスタイル設定に基づいてHTMLに変換します",
+  icons: {
+    icon: [
+      {
+        url: '/favicon.svg',
+        type: 'image/svg+xml',
+      },
+      { 
+        url: '/favicon.ico',
+        sizes: 'any',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

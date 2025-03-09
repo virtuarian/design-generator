@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileCode, Eye, Code, Save, Download, Check, Sparkles, Copy, RefreshCw, AlertTriangle } from 'lucide-react';
+import { FileCode, Eye, Code, Download, Check, Sparkles, Copy, RefreshCw, AlertTriangle } from 'lucide-react';
 import { useSettings } from '@/contexts/SettingsContext';
 import { useView } from '@/contexts/ViewContext';
-import Preview from '@/components/Preview'; // Preview コンポーネントのインポートを追加
+import Preview from '@/components/Preview';
 
 // Content Areaのpropsを簡素化
 interface ContentAreaProps {
@@ -36,6 +36,7 @@ const ContentArea: React.FC<ContentAreaProps> = ({
   
   // コピー状態の管理
   const [isCopied, setIsCopied] = useState(false);
+  const [isDownloaded, setIsDownloaded] = useState(false);
 
   // 入力されたテキストを更新
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -53,12 +54,48 @@ const ContentArea: React.FC<ContentAreaProps> = ({
     }
   };
 
+  // HTMLをファイルとしてダウンロード
+  const handleDownloadHtml = () => {
+    if (!outputHtml) return;
+    
+    try {
+      // Blobオブジェクトを作成
+      const blob = new Blob([outputHtml], { type: 'text/html' });
+      
+      // ダウンロードリンクを作成
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      
+      // ファイル名を設定（日時を追加して一意にする）
+      const now = new Date();
+      const timestamp = `${now.getFullYear()}${(now.getMonth()+1).toString().padStart(2, '0')}${now.getDate().toString().padStart(2, '0')}_${now.getHours().toString().padStart(2, '0')}${now.getMinutes().toString().padStart(2, '0')}`;
+      a.download = `graphic_${timestamp}.html`;
+      
+      a.href = url;
+      document.body.appendChild(a);
+      a.click();
+      
+      // クリーンアップ
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      // ダウンロード完了表示
+      setIsDownloaded(true);
+      setTimeout(() => setIsDownloaded(false), 2000);
+    } catch (err) {
+      console.error('HTMLのダウンロードに失敗しました', err);
+    }
+  };
+
   // HTMLを生成する関数
   const handleConvert = async () => {
     const result = await onConvert(settings);
     if (result) {
       setIsConverted(true);
       setSettingsChanged(false);
+      
+      // 変換が完了したら自動的にプレビュー画面に切り替え
+      setCurrentView('preview');
     }
   };
 
@@ -115,19 +152,25 @@ const ContentArea: React.FC<ContentAreaProps> = ({
             HTML変換
           </Button>
           
-          <Button variant="outline" size="sm" className="text-stone-600 border-stone-300 gap-2">
-            <Save className="h-4 w-4" />
-            保存
-          </Button>
-          
+          {/* 保存ボタンをダウンロードボタンに変更 */}
           <Button 
             variant="outline" 
             size="sm" 
-            className="text-stone-600 border-stone-300 gap-2" 
-            disabled={!isConverted}
+            className="text-stone-600 border-stone-300 gap-2"
+            onClick={handleDownloadHtml}
+            disabled={!isConverted || isLoading}
           >
-            <Download className="h-4 w-4" />
-            エクスポート
+            {isDownloaded ? (
+              <>
+                <Check className="h-4 w-4 text-green-500" />
+                保存済み
+              </>
+            ) : (
+              <>
+                <Download className="h-4 w-4" />
+                保存
+              </>
+            )}
           </Button>
         </div>
       </div>

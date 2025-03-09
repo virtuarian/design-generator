@@ -315,7 +315,7 @@ export const GRAPHIC_RECORDING_PRESET: Partial<AppSettings> = {
     hasAnimation: true,
     textureType: 'paper',
     gradientType: 'none',
-    designStyle: 'graphicRecording',
+    designStyle: 'graphicRecordingNormal',
     summarizeText: true
   },
   colors: {
