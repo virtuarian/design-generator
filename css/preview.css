@@ -1,0 +1,344 @@
+/* プレビューラッパーのスタイル */
+.preview-wrapper {
+  background-color: #f0ebe6;
+  padding: 1.5rem;
+  overflow: auto;
+  height: 100%;
+  transition: background-color 0.5s ease;
+}
+
+/* プレビューコンテナのスタイル */
+#preview-container {
+  background-color: #fffcf8;
+  padding: 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  max-width: 48rem;
+  margin: 0 auto;
+  font-family: 'Georgia', serif;
+  position: relative;
+  border: none;
+  transition: all 0.3s ease;
+  min-height: 300px; /* 最小の高さを設定 */
+}
+
+#preview-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(210, 180, 140, 0.2);
+  border-radius: 1rem;
+  pointer-events: none;
+}
+
+/* プレビューヘッダーのアートスタイル */
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(180, 160, 120, 0.2);
+}
+
+.preview-title {
+  font-family: 'Garamond', serif;
+  font-size: 1.2rem;
+  color: #8b7355;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+.preview-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.preview-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.preview-dot.red { background-color: #d88c9a; }
+.preview-dot.gold { background-color: #d4af37; }
+.preview-dot.green { background-color: #7c9b72; }
+
+/* プレビューコンテナ内のスタイルはここに定義 */
+#preview-container * {
+  /* プレビュー内の要素に共通して適用するスタイル */
+  box-sizing: border-box;
+}
+
+/* 必要に応じてプレビュー内の特定要素にスタイルを適用 */
+#preview-container h1,
+#preview-container h2,
+#preview-container h3 {
+  color: #5d4037;
+  margin: 1.5em 0 0.7em;
+  font-weight: normal;
+  line-height: 1.3;
+  font-family: 'Garamond', 'Georgia', serif;
+}
+
+#preview-container h1 {
+  font-size: 2.2em;
+  border-bottom: 1px solid rgba(180, 160, 120, 0.2);
+  padding-bottom: 0.3em;
+}
+
+#preview-container h2 {
+  font-size: 1.7em;
+}
+
+#preview-container h3 {
+  font-size: 1.4em;
+}
+
+#preview-container p {
+  margin: 1em 0;
+  line-height: 1.7;
+  color: #5a4a42;
+  font-size: 1.05em;
+}
+
+#preview-container img {
+  max-width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#preview-container blockquote {
+  border-left: 4px solid #d4c5b9;
+  margin-left: 0;
+  padding: 0.8em 1em 0.8em 2em;
+  background-color: rgba(212, 197, 185, 0.1);
+  border-radius: 0 4px 4px 0;
+  font-style: italic;
+  color: #6d5d53;
+}
+
+#preview-container ul, 
+#preview-container ol {
+  margin: 1em 0;
+  padding-left: 2em;
+  color: #5a4a42;
+}
+
+#preview-container li {
+  margin: 0.5em 0;
+  line-height: 1.5;
+}
+
+#preview-container code {
+  background: rgba(200, 185, 170, 0.15);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+  color: #6b584c;
+}
+
+#preview-container pre {
+  background: rgba(200, 185, 170, 0.15);
+  padding: 1em;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+/* ブラウザUIスタイル */
+.bg-stone-100 {
+  background-color: #f5f5f4;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.h-10 {
+  height: 2.5rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-stone-200 {
+  border-color: #e7e5e4;
+}
+
+.space-x-2 > * + * {
+  margin-left: 0.5rem;
+}
+
+.w-3 {
+  width: 0.75rem;
+}
+
+.h-3 {
+  height: 0.75rem;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.bg-red-400 {
+  background-color: #f87171;
+}
+
+.bg-amber-400 {
+  background-color: #fbbf24;
+}
+
+.bg-green-400 {
+  background-color: #4ade80;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-stone-500 {
+  color: #78716c;
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.text-amber-500 {
+  color: #f59e0b;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.max-w-3xl {
+  max-width: 48rem;
+}
+
+.max-w-4xl {
+  max-width: 56rem;
+}
+
+/* ローディング表示スタイル */
+#loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  height: 300px;
+}
+
+.loader {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(210, 180, 140, 0.3);
+  border-radius: 50%;
+  border-top-color: #d2b48c;
+  animation: spin 1s ease-in-out infinite;
+  margin-bottom: 1.5rem;
+}
+
+.loader-text {
+  color: #8b7355;
+  font-family: 'Garamond', serif;
+  letter-spacing: 1px;
+  font-size: 1.1em;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* コンテンツフェードイン */
+#preview-content {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* iframe用のコンテナスタイル */
+.iframe-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Shadow DOM コンテナ用のスタイル */
+.shadow-dom-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* iframe特有のスタイル */
+#preview-container iframe {
+  width: 100%;
+  border: none;
+  display: block;
+  transition: height 0.3s ease;
+}
+
+/* フェードイン効果 */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}

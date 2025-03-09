@@ -1,0 +1,134 @@
+/* クロードスタイルのプレビュー用CSS */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+
+.claude-preview {
+  --bg-primary: #fffcf9;
+  --bg-secondary: #f8f5f1;
+  --bg-tertiary: #f0e6d6;
+  --text-primary: #5d4037;
+  --text-secondary: #8b7355;
+  --text-tertiary: #a9947a;
+  --border-color: #e8ded0;
+  --accent-red: #e09d9d;
+  --accent-gold: #e6c478;
+  --accent-green: #a3c9a3;
+  
+  font-family: 'Lora', 'EB Garamond', serif;
+}
+
+/* アニメーション定義 */
+@keyframes claudeFadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.claude-fade-in {
+  animation: claudeFadeIn 0.7s ease-out forwards;
+}
+
+/* リッチテキスト内の詳細スタイル */
+.claude-content h1,
+.claude-content h2,
+.claude-content h3,
+.claude-content h4,
+.claude-content h5,
+.claude-content h6 {
+  font-family: 'EB Garamond', 'Lora', serif;
+  font-weight: normal;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.claude-content h1 {
+  font-size: 2.2em;
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
+  padding-bottom: 0.2em;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.claude-content h2 {
+  font-size: 1.8em;
+  margin-top: 1.1em;
+  margin-bottom: 0.5em;
+}
+
+.claude-content h3 {
+  font-size: 1.4em;
+  margin-top: 1em;
+  margin-bottom: 0.4em;
+}
+
+.claude-content p {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.claude-content blockquote {
+  border-left: 3px solid var(--text-tertiary);
+  padding-left: 1em;
+  margin-left: 0;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.claude-content code {
+  font-family: 'Courier New', monospace;
+  background-color: rgba(240, 230, 214, 0.3);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.claude-content pre {
+  background-color: rgba(240, 230, 214, 0.3);
+  padding: 1em;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
+.claude-content pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* Claudeのスピナーアニメーション */
+.claude-spinner {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.claude-spinner::before, 
+.claude-spinner::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+}
+
+.claude-spinner::before {
+  inset: 0;
+  border: 4px solid rgba(210, 180, 140, 0.2);
+  border-top-color: #d2b48c;
+  animation: claudeSpin 1s linear infinite;
+}
+
+.claude-spinner::after {
+  inset: 8px;
+  border: 3px solid rgba(210, 180, 140, 0.15);
+  border-bottom-color: #a9947a;
+  animation: claudeSpin 1.4s linear infinite reverse;
+}
+
+@keyframes claudeSpin {
+  to { transform: rotate(360deg); }
+}

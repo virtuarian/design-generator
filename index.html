@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Converter</title>
+  <!-- プレビュー専用のCSSをインポート -->
+  <link rel="stylesheet" href="css/preview.css">
+  <!-- Googleフォントの追加 -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap">
+  <!-- その他のスタイルシート -->
+  <!-- ...existing code... -->
+</head>
+<body>
+  <!-- ...existing code... -->
+  
+  <div class="container">
+    <h1>HTML Converter</h1>
+    
+    <div class="input-section">
+      <h2>入力HTML</h2>
+      <form id="html-form">
+        <textarea id="html-input" rows="10" placeholder="HTMLコードを入力してください"></textarea>
+        <button id="preview-button" type="button">プレビュー表示</button>
+      </form>
+    </div>
+    
+    <div class="output-section">
+      <h2>プレビュー</h2>
+      <!-- アーティスティックモード風プレビュー -->
+      <div class="preview-wrapper">
+        <div id="loading-container" style="display: none;">
+          <div class="loader"></div>
+          <div class="loader-text">想像を形に変換中...</div>
+        </div>
+        
+        <div id="preview-content">
+          <!-- 注意: ここにヘッダーが動的に挿入されます -->
+          <div id="preview-container" class="iframe-container">
+            <!-- iframeがここに動的に追加されます -->
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- その他の機能やボタンなど -->
+    <!-- ...existing code... -->
+  </div>
+
+  <!-- JavaScriptファイルの読み込み -->
+  <script src="js/preview.js"></script>
+  <script src="js/form-handler.js"></script>
+  <!-- その他のスクリプト -->
+  <!-- ...existing code... -->
+</body>
+</html>
