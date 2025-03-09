@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Wand2, Settings, HelpCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -32,6 +32,25 @@ const HTMLConverterApp = () => {
   // クライアントサイドレンダリング用のデフォルト値を設定
   const [initialSettings, setInitialSettings] = useState<AppSettings>(DEFAULT_SETTINGS);
 
+  // 指定されたモデルのAPIキーをチェック
+  const checkApiKeyForModel = useCallback((modelKey: string, customModels: Record<string, { provider: string, name: string }> = {}) => {
+    const model = AI_MODELS[modelKey] || customModels[modelKey];
+    if (!model) return;
+    
+    const apiKeyProvider = model.provider;
+    const apiKey = getApiKey(apiKeyProvider);
+    
+    if (!apiKey) {
+      toast.warning(`${getProviderDisplayName(apiKeyProvider)}のAPIキーが設定されていません`, {
+        description: '設定アイコンからAPIキーを設定してください',
+        action: {
+          label: '設定する',
+          onClick: () => setLlmSettingsDialogOpen(true)
+        }
+      });
+    }
+  }, [setLlmSettingsDialogOpen]);
+  
   // クライアントサイドで実行される初期化処理
   useEffect(() => {
     // ローカルストレージから設定を読み込む
@@ -56,26 +75,7 @@ const HTMLConverterApp = () => {
       setSelectedModel(DEFAULT_MODEL);
       checkApiKeyForModel(DEFAULT_MODEL);
     }
-  }, []);
-  
-  // 指定されたモデルのAPIキーをチェック
-  const checkApiKeyForModel = (modelKey: string, customModels: Record<string, { provider: string, name: string }> = {}) => {
-    const model = AI_MODELS[modelKey] || customModels[modelKey];
-    if (!model) return;
-    
-    const apiKeyProvider = model.provider;
-    const apiKey = getApiKey(apiKeyProvider);
-    
-    if (!apiKey) {
-      toast.warning(`${getProviderDisplayName(apiKeyProvider)}のAPIキーが設定されていません`, {
-        description: '設定アイコンからAPIキーを設定してください',
-        action: {
-          label: '設定する',
-          onClick: () => setLlmSettingsDialogOpen(true)
-        }
-      });
-    }
-  };
+  }, [checkApiKeyForModel]);
   
   // プロバイダー名を表示用に変換
   const getProviderDisplayName = (provider: string): string => {

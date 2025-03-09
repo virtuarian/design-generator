@@ -9,17 +9,9 @@ const Preview: React.FC<PreviewProps> = ({ html, isLoading }) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [error, setError] = useState<string | null>(null);
   
-  // コンテンツが更新されるたびにフェードインアニメーションを設定
-  useEffect(() => {
-    if (!isLoading && html) {
-      setError(null); // エラー状態をリセット
-      updateIframeContent();
-      
-    }
-  }, [html, isLoading]);
-
+ 
   // iframeにHTMLコンテンツを更新
-  const updateIframeContent = () => {
+  const updateIframeContent = React.useCallback(() => {
     if (!iframeRef.current || !html) return;
 
     try {
@@ -187,7 +179,17 @@ const Preview: React.FC<PreviewProps> = ({ html, isLoading }) => {
       console.error('iframeコンテンツ更新エラー:', error);
       setError('プレビューの表示中にエラーが発生しました。HTMLコードを確認してください。');
     }
-  };
+  }, [html]);
+
+   // コンテンツが更新されるたびにフェードインアニメーションを設定
+   useEffect(() => {
+    if (!isLoading && html) {
+      setError(null); // エラー状態をリセット
+      updateIframeContent();
+      
+    }
+  }, [html, isLoading, updateIframeContent]);
+
 
   return (
     <div className="h-full w-full bg-stone-100 p-4 overflow-auto">

@@ -57,7 +57,7 @@ const SettingsPanel = () => {
   useEffect(() => {
     setActiveSetting('style');
     // console.log('初期タブを設定: style');
-  }, []); // 依存配列を空に設定
+  }, [setActiveSetting]); // 依存配列を空に設定
 
   // プロンプトプレビューを生成する関数
   const generatePromptPreview = () => {
