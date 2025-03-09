@@ -226,11 +226,11 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}`
           </div>
           
           <div className="flex-1 overflow-y-auto">
-            <TabsContent value="style" className="p-4 h-full">
+            <TabsContent value="style" className="p-4 h-[300px] overflow-y-auto">
               <Label className="text-sm font-medium text-stone-700 mb-3 block">デザインスタイルを選択</Label>
               
               {/* シンプルなラジオグループに書き換え */}
-              <div className="space-y-2" role="radiogroup" aria-label="デザインスタイル">
+              <div className="space-y-2 h-full" role="radiogroup" aria-label="デザインスタイル">
                 {DESIGN_STYLE_OPTIONS.map(style => {
                   const styleDefinition = getStyleDefinition(style.id);
                   // ローカル状態を使用して選択状態を決定
@@ -432,7 +432,7 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}`
             </TabsContent>
              */}
             {/* プロンプトタブ */}
-            <TabsContent value="prompt" className="p-4 h-full">
+            <TabsContent value="prompt" className="p-4  h-[300px] overflow-y-auto ">
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
                   <MessageSquare className="h-4 w-4 text-amber-700" />
@@ -443,7 +443,7 @@ ${styleDefinition.prompt || '特別なスタイル指示はありません。'}`
                   value={customPrompt}
                   onChange={handlePromptChange}
                   placeholder="AIに対する追加指示を入力..."
-                  className="min-h-[150px] text-sm"
+                  className="max-h-[150px] min-h-[150px] text-sm"
                 />
                 
                 <Button
