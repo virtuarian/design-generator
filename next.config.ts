@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  output: 'export', // 静的ファイルとして出力
+  images: {
+    unoptimized: true, // Cloudflareではデフォルトの画像最適化が使えないため
+  },
 };
 
 export default nextConfig;
