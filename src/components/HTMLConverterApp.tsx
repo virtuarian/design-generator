@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Wand2, Settings, HelpCircle, Menu, X } from 'lucide-react';
+import { Wand2, Settings, HelpCircle} from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { AppSettings } from '@/lib/types'; // AppSettingsを明示的にインポート
 import { getApiKey, getSettings, saveSettings, getCustomModels } from '@/lib/storage';
 import { LLMFactory, LLMError, LLMErrorType } from '@/lib/llm';
-import SettingsPanel from './SettingsPanel';
+
 import ContentArea from './ContentArea';
 import HelpPanel from './HelpPanel';
 import LLMSettingsDialog from './LLMSettingsDialog';
@@ -27,7 +27,7 @@ const HTMLConverterApp = () => {
   
   // レスポンシブ対応用の状態
   const [isMobileView, setIsMobileView] = useState<boolean>(false);
-  const [showSidebar, setShowSidebar] = useState<boolean>(true);
+  const [, setShowSidebar] = useState<boolean>(true);
   
   // LLM設定ダイアログ
   const [llmSettingsDialogOpen, setLlmSettingsDialogOpen] = useState<boolean>(false);
@@ -41,12 +41,6 @@ const HTMLConverterApp = () => {
     const checkViewport = () => {
       const isMobile = window.innerWidth < 768; // 768px未満をモバイルとみなす
       setIsMobileView(isMobile);
-      // モバイルビューではサイドバーを初期非表示に変更（モバイルでは常に非表示からスタート）
-      if (isMobile) {
-        setShowSidebar(false);
-      } else {
-        setShowSidebar(true);
-      }
     };
 
     // 初期チェック
@@ -243,10 +237,7 @@ const HTMLConverterApp = () => {
     }
   };
 
-  // サイドバーの表示/非表示を切り替える
-  const toggleSidebar = () => {
-    setShowSidebar(!showSidebar);
-  };
+
 
   // ContentAreaから設定パネルの表示を要求された時の処理
   const handleShowSettings = useCallback(() => {
@@ -261,26 +252,16 @@ const HTMLConverterApp = () => {
       <ViewProvider>
         <div className="flex flex-col h-screen bg-stone-50 overflow-hidden">
           {/* ヘッダー */}
-          <header className="bg-stone-800 text-stone-100 px-4 sm:px-6 py-3 flex justify-between items-center shadow-md">
-            <div className="flex items-center gap-3">
-              {isMobileView && (
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="text-stone-100 hover:bg-stone-700 mr-1 p-1.5" 
-                  onClick={toggleSidebar}
-                >
-                  {showSidebar ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-                </Button>
-              )}
+          <header className="bg-stone-800 text-stone-100 px-2 sm:px-6 py-2.5 sm:py-3 flex justify-between items-center shadow-md">
+            <div className="flex items-center gap-2 sm:gap-3">
               <Wand2 className="text-amber-400" />
               <h1 className="text-xl font-medium hidden sm:block">Design Generator</h1>
-              <h1 className="text-lg font-medium sm:hidden">Design Gen</h1>
+              <h1 className="text-lg font-medium sm:hidden">DesignGen</h1>
             </div>
             
-            <div className="flex items-center gap-2 sm:gap-4">
+            <div className="flex items-center gap-1 sm:gap-4">
               {/* モバイルビューでは簡略化されたモデル選択を表示 */}
-              <div className={`${isMobileView ? 'max-w-[120px]' : ''}`}>
+              <div className="mr-1 sm:mr-0">
                 <ModelSelector 
                   selectedModelKey={selectedModel}
                   onSelectModel={handleModelChange}
@@ -292,33 +273,26 @@ const HTMLConverterApp = () => {
               <Button 
                 size="sm" 
                 variant="ghost" 
-                className="text-stone-100 hover:bg-stone-700 p-1.5 sm:p-2" 
+                className="text-stone-100 hover:bg-stone-700 p-1 sm:p-2" 
                 onClick={() => setShowTips(!showTips)}
               >
-                <HelpCircle className="h-5 w-5" />
+                <HelpCircle className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
               
               <Button 
                 size="sm" 
                 variant="ghost" 
-                className="text-stone-100 hover:bg-stone-700 p-1.5 sm:p-2"
+                className="text-stone-100 hover:bg-stone-700 p-1 sm:p-2"
                 onClick={() => setLlmSettingsDialogOpen(true)}
               >
-                <Settings className="h-5 w-5" />
+                <Settings className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             </div>
           </header>
 
           {/* メインエリア */}
           <main className="flex flex-1 overflow-hidden relative">
-            {/* サイドパネルは設定がタブ化されたため、通常の表示では非表示に */}
-            <div 
-              className={`${showSidebar && isMobileView ? 'block' : 'hidden'} ${isMobileView ? 'absolute z-10 h-full bg-stone-50 shadow-lg' : 'relative'}`} 
-              style={isMobileView ? {width: '85%', maxHeight: '100%', overflowY: 'auto'} : {minWidth: '300px', maxWidth: '400px'}}
-            >
-              <SettingsPanel onClose={isMobileView ? toggleSidebar : undefined} />
-            </div>
-
+            
             {/* メインコンテンツエリア */}
             <ContentArea 
               inputText={inputText}

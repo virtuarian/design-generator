@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileCode, Eye, Code, Download, Check, Sparkles, Copy, RefreshCw, AlertTriangle, Settings } from 'lucide-react';
+import { FileCode, Eye, Code, Download, Check, Sparkles, Copy, RefreshCw, Settings } from 'lucide-react';
 import { useSettings } from '@/contexts/SettingsContext';
 import { useView } from '@/contexts/ViewContext';
 import Preview from '@/components/Preview';
@@ -112,13 +112,14 @@ const ContentArea: React.FC<ContentAreaProps> = ({
   return (
     <div className="flex flex-1 flex-col md:flex-row overflow-hidden">
       <div className={`flex-1 flex flex-col overflow-hidden ${currentView === 'edit' && !isMobileView ? 'hidden md:flex' : ''}`}>
-        <div className="flex justify-between items-center md:p-2 border-b border-stone-200">
-          <div className="flex items-center space-x-4">
+        <div className="flex justify-between items-center p-1 md:p-2 border-b border-stone-200">
+          {/* タブナビゲーション */}
+          <div className="flex items-center space-x-1 md:space-x-4">
             <div className="flex bg-stone-100 rounded-lg p-1 overflow-x-auto">
               {/* 設定タブ */}
               <Button 
                 variant={currentView === 'settings' ? "default" : "ghost"} 
-                className={`text-xs md:text-sm gap-1 md:gap-1 ${currentView === 'settings' ? 'bg-amber-600 text-white' : 'text-stone-700'}`}
+                className={`text-xs md:text-sm gap-0.5 md:gap-1 px-1.5 md:px-3 ${currentView === 'settings' ? 'bg-amber-600 text-white' : 'text-stone-700'}`}
                 onClick={() => setCurrentView('settings')}
               >
                 <Settings className="h-3 w-3 md:h-4 md:w-4" />
@@ -128,7 +129,7 @@ const ContentArea: React.FC<ContentAreaProps> = ({
 
               <Button 
                 variant={currentView === 'edit' ? "default" : "ghost"} 
-                className={`text-xs md:text-sm gap-1 md:gap-2 ${currentView === 'edit' ? 'bg-amber-600 text-white' : 'text-stone-700'}`}
+                className={`text-xs md:text-sm gap-0.5 md:gap-2 px-1.5 md:px-3 ${currentView === 'edit' ? 'bg-amber-600 text-white' : 'text-stone-700'}`}
                 onClick={() => setCurrentView('edit')}
               >
                 <FileCode className="h-3 w-3 md:h-4 md:w-4" />
@@ -138,7 +139,7 @@ const ContentArea: React.FC<ContentAreaProps> = ({
               
               <Button 
                 variant={currentView === 'preview' ? "default" : "ghost"} 
-                className={`text-xs md:text-sm gap-1 md:gap-2 ${currentView === 'preview' ? 'bg-amber-600 text-white' : 'text-stone-700'}`}
+                className={`text-xs md:text-sm gap-0.5 md:gap-2 px-1.5 md:px-3 ${currentView === 'preview' ? 'bg-amber-600 text-white' : 'text-stone-700'}`}
                 onClick={() => setCurrentView('preview')}
                 disabled={!isConverted && !isLoading}
               >
@@ -149,7 +150,7 @@ const ContentArea: React.FC<ContentAreaProps> = ({
               
               <Button 
                 variant={currentView === 'code' ? "default" : "ghost"} 
-                className={`text-xs md:text-sm gap-1 md:gap-2 ${currentView === 'code' ? 'bg-amber-600 text-white' : 'text-stone-700'}`}
+                className={`text-xs md:text-sm gap-0.5 md:gap-2 px-1.5 md:px-3 ${currentView === 'code' ? 'bg-amber-600 text-white' : 'text-stone-700'}`}
                 onClick={() => setCurrentView('code')}
                 disabled={!isConverted && !isLoading}
               >
@@ -158,60 +159,46 @@ const ContentArea: React.FC<ContentAreaProps> = ({
                 <span className="md:hidden">HTML</span>
               </Button>
             </div>
-
-            {/* 設定変更通知 */}
-            {settingsChanged && isConverted && (currentView === 'preview' || currentView === 'code') && (
-              <div className="bg-amber-50 border-b border-amber-200 px-4 py-2 flex items-center gap-2">
-                <AlertTriangle className="h-4 w-4 text-amber-600" />
-                <p className="text-xs text-amber-800">設定が変更されました。最新の設定を反映するには「HTMLに変換」をクリックしてください。</p>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="ml-auto text-xs border-amber-300 text-amber-700 bg-amber-50 h-7"
-                  onClick={() => setCurrentView('edit')}
-                >
-                  編集に戻る
-                </Button>
-              </div>
-            )}
           </div>
-          <div className="flex gap-2">
-            {/* 再生成ボタン */}
+
+          {/* 右側のボタングループ */}
+          <div className="flex gap-1 md:gap-2">
+            {/* 再生成ボタン - モバイルでは短いテキスト */}
             <Button 
               variant="outline" 
               size="sm" 
-              className="text-stone-600 border-stone-300 gap-2"
+              className="text-stone-600 border-stone-300 text-xs md:text-sm px-1.5 md:px-3"
               onClick={() => handleConvert()}
               disabled={isLoading || (!isConverted && inputText.trim().length === 0)}
             >
-              <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
-              HTML変換
+              <RefreshCw className={`h-3.5 w-3.5 md:h-4 md:w-4 ${isLoading ? 'animate-spin' : ''} ${isMobileView ? 'mr-0' : 'mr-1'}`} />
+              <span className={isMobileView ? "hidden" : "inline"}>変換</span>
             </Button>
             
-            {/* 保存ボタンをダウンロードボタンに変更 */}
+            {/* 保存ボタン - モバイルではアイコンのみ */}
             <Button 
               variant="outline" 
               size="sm" 
-              className="text-stone-600 border-stone-300 gap-2"
+              className="text-stone-600 border-stone-300 text-xs md:text-sm px-1.5 md:px-3"
               onClick={handleDownloadHtml}
               disabled={!isConverted || isLoading}
             >
               {isDownloaded ? (
                 <>
-                  <Check className="h-4 w-4 text-green-500" />
-                  保存済み
+                  <Check className="h-3.5 w-3.5 md:h-4 md:w-4 text-green-500" />
+                  <span className={isMobileView ? "hidden" : "inline"}>保存済み</span>
                 </>
               ) : (
                 <>
-                  <Download className="h-4 w-4" />
-                  保存
+                  <Download className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                  <span className={isMobileView ? "hidden" : "inline"}>保存</span>
                 </>
               )}
             </Button>
           </div>
         </div>
         <div className={`flex-1 overflow-hidden ${settingsChanged && isConverted ? 'opacity-80' : ''}`}>
-          {/* 設定タブ (モバイル表示) */}
+          {/* 設定タブ*/}
           {currentView === 'settings' && (
             <div className="h-full overflow-y-auto">
               <SettingsPanel embedded={true} />

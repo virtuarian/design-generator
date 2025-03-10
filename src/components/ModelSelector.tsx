@@ -77,10 +77,10 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
         <Button 
           variant="outline" 
           role="combobox" 
-          className={`w-48 ${compact ? 'w-[120px] text-sm' : 'w-48'} justify-between bg-stone-700 border-stone-600 text-stone-100 hover:bg-stone-600`}
+          className={`${compact ? 'w-[110px] text-xs px-2' : 'w-48 text-sm'} justify-between bg-stone-700 border-stone-600 text-stone-100 hover:bg-stone-600`}
         >
-          {selectedModel?.name || 'モデルを選択'}
-          <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <span className="truncate">{selectedModel?.name || 'モデルを選択'}</span>
+          <ChevronDown className="ml-1 h-3.5 w-3.5 shrink-0 opacity-50" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 bg-white">
