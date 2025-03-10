@@ -132,8 +132,8 @@ const ContentArea: React.FC<ContentAreaProps> = ({
                 onClick={() => setCurrentView('edit')}
               >
                 <FileCode className="h-3 w-3 md:h-4 md:w-4" />
-                <span className="hidden md:inline">編集</span>
-                <span className="md:hidden">編集</span>
+                <span className="hidden md:inline">文章</span>
+                <span className="md:hidden">文章</span>
               </Button>
               
               <Button 
@@ -266,9 +266,9 @@ const ContentArea: React.FC<ContentAreaProps> = ({
           {/* 編集ビュー（モバイル表示時のみ） */}
           {currentView === 'edit' && (
             <div className="h-full flex flex-col overflow-y-auto">
-              <div className="bg-stone-50 p-4 flex-none">
+              <div className="bg-stone-50 pt-3 px-4 pb-2 flex-none"> {/* ここでpaddingを調整 */}
                 <Card className="shadow-sm border-stone-200">
-                  <CardHeader className="bg-gradient-to-r from-amber-50 to-stone-50 border-b border-stone-200">
+                  <CardHeader className="bg-gradient-to-r from-amber-50 to-stone-50 border-b border-stone-200 py-3"> {/* paddingを縮小 */}
                     <CardTitle className="text-amber-800 text-lg flex justify-between items-center">
                       <span>変換したい文章を入力</span>
                       <span className="text-sm text-stone-500 font-normal">文字数: {getCharCount()}</span>
@@ -306,6 +306,7 @@ const ContentArea: React.FC<ContentAreaProps> = ({
               </div>
             </div>
           )}
+          
         </div>
       </div>
     </div>

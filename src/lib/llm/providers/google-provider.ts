@@ -120,7 +120,7 @@ export class GoogleProvider extends BaseLLMProvider {
     // カスタムプロンプトとテキストを組み合わせた最終プロンプトを生成
     const finalPrompt = this.generateCustomFinalPrompt(message, customPrompt);
     const apiUrl = `${this.endpoint}?key=${this.apiKey}`;
-console.log('finalPrompt', finalPrompt);
+// console.log('finalPrompt', finalPrompt);
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',

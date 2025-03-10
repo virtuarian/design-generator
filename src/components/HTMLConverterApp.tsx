@@ -163,9 +163,9 @@ const HTMLConverterApp = () => {
       const toastId = `html-generation-${Date.now()}`;
       
       // デバッグ用ログを追加
-      console.log('変換実行時のスタイル設定:', currentSettings.basic.designStyle);
-      console.log('変換実行時のカスタムプロンプト (先頭部分):', 
-        currentSettings.additionalInstructions ? currentSettings.additionalInstructions.substring(0, 150) + '...' : 'なし');
+      // console.log('変換実行時のスタイル設定:', currentSettings.basic.designStyle);
+      // console.log('変換実行時のカスタムプロンプト (先頭部分):', 
+      //   currentSettings.additionalInstructions ? currentSettings.additionalInstructions.substring(0, 150) + '...' : 'なし');
       
       // ローディング通知を表示
       toast.loading(`${modelInfo.name} でHTMLを生成中...`, { id: toastId });
