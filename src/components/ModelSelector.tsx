@@ -23,12 +23,14 @@ interface ModelSelectorProps {
   selectedModelKey: string;
   onSelectModel: (modelKey: string) => void;
   showOnlyAdvanced?: boolean;
+  compact?: boolean; // コンパクト表示用のプロパティ追加
 }
 
 const ModelSelector: React.FC<ModelSelectorProps> = ({
   selectedModelKey,
   onSelectModel,
-  showOnlyAdvanced = false
+  showOnlyAdvanced = false,
+  compact = false
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   
@@ -75,7 +77,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
         <Button 
           variant="outline" 
           role="combobox" 
-          className="w-48 justify-between bg-stone-700 border-stone-600 text-stone-100 hover:bg-stone-600"
+          className={`w-48 ${compact ? 'w-[120px] text-sm' : 'w-48'} justify-between bg-stone-700 border-stone-600 text-stone-100 hover:bg-stone-600`}
         >
           {selectedModel?.name || 'モデルを選択'}
           <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />

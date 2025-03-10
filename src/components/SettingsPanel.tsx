@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import {X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Eye, EyeOff, RefreshCw, MessageSquare, Plus, Edit, Trash2 } from 'lucide-react';
 import { Label } from '@/components/ui/label';
@@ -31,7 +32,12 @@ const DESIGN_STYLE_OPTIONS = [
   { id: 'magazine', displayName: '雑誌風' }
 ];
 
-const SettingsPanel = () => {
+interface SettingsPanelProps {
+  onClose?: () => void; // 閉じるボタン用のコールバック
+  embedded?: boolean; // ContentAreaに埋め込まれるかどうか
+}
+
+const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose, embedded = false }) => {
   // コンテキストから状態と関数を取得
   const { 
     settings,
@@ -535,7 +541,22 @@ ${stylePrompt || '特別なスタイル指示はありません。'}`;
   // console.log('レンダリング時の選択スタイル:', selectedStyle, '設定値:', settings.basic.designStyle);
 
   return (
-    <aside className="w-80 bg-stone-100 border-r border-stone-200 flex flex-col transition-all duration-300 ease-in-out overflow-hidden">
+    <div className={`flex flex-col h-full w-full ${embedded ? '' : 'border-r'} border-stone-200 bg-stone-50 overflow-y-auto`}>
+      {!embedded && (
+        <div className="p-4 border-b border-stone-200 flex justify-between items-center bg-stone-100 sticky top-0 z-10">
+          <h2 className="text-lg font-medium text-stone-800">設定</h2>
+          {onClose && (
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={onClose} 
+              className="p-1 hover:bg-stone-200 rounded-full"
+            >
+              <X className="h-5 w-5" />
+            </Button>
+          )}
+        </div>
+      )}
       <div className="flex flex-col h-full">
         {/* ヘッダー */}
         <div className="p-4 border-b border-stone-200 bg-white">
@@ -555,7 +576,7 @@ ${stylePrompt || '特別なスタイル指示はありません。'}`;
           </div>
           
           <div className="flex-1 overflow-y-auto">
-            <TabsContent value="style" className="p-4 h-[300px] overflow-y-auto">
+            <TabsContent value="style" className="p-4 h-auto">
               <div className="flex justify-between items-center mb-3">
                 <Label className="text-sm font-medium text-stone-700">デザインスタイルを選択</Label>
                 <Button
@@ -635,7 +656,7 @@ ${stylePrompt || '特別なスタイル指示はありません。'}`;
             </TabsContent>
 
             {/* プロンプトタブ */}
-            <TabsContent value="prompt" className="p-4  h-[300px] overflow-y-auto ">
+            <TabsContent value="prompt" className="p-4 h-auto">
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
                   <MessageSquare className="h-4 w-4 text-amber-700" />
@@ -729,7 +750,7 @@ ${stylePrompt || '特別なスタイル指示はありません。'}`;
                 value={styleForm.description}
                 onChange={handleStyleFormChange}
                 placeholder="このスタイルの簡単な説明"
-                className="text-sm"
+                className="text-sm max-h-[80px] min-h-[80px]"
                 rows={2}
               />
             </div>
@@ -741,7 +762,7 @@ ${stylePrompt || '特別なスタイル指示はありません。'}`;
                 value={styleForm.prompt}
                 onChange={handleStyleFormChange}
                 placeholder="AIに対する指示"
-                className="text-sm"
+                className="max-h-[150px] min-h-[150px] text-sm"
                 rows={4}
               />
             </div>
@@ -832,7 +853,7 @@ ${stylePrompt || '特別なスタイル指示はありません。'}`;
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </aside>
+    </div>
   );
 };
 

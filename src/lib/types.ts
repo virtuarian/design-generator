@@ -169,7 +169,7 @@ export interface AppSettings {
 export type PresetType = 'corporate' | 'casual' | 'minimal' | 'creative' | 'popArt' | 'custom';
 
 // アプリケーションの表示モード
-export type ViewMode = 'edit' | 'preview' | 'code';
+export type ViewMode = 'edit' | 'preview' | 'code' | 'settings';
 
 // 設定パネルのタブ
 export type SettingTab = 'style' | 'prompt';
